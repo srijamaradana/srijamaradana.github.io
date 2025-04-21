@@ -1,0 +1,280 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.header {
+    min-height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(102, 96, 100, 0.7), rgba(133, 126, 133, 0.7)), url(6.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+}
+
+.nav-links {
+    flex: 1;
+    text-align: right;
+}
+
+.nav-links ul {
+    list-style: none;
+}
+
+.nav-links ul li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+.nav-links ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: 0.3s ease-in-out;
+}
+
+.nav-links ul li::after {
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #f44336;
+    display: block;
+    margin: auto;
+}
+
+.nav-links ul li:hover::after {
+    width: 100%;
+}
+
+.text-box {
+    width: 90%;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.text-box h1 {
+    font-size: 40px;
+}
+
+.text-box p {
+    margin: 10px 0 40px;
+    font-size: 18px;
+}
+
+.hero-btn {
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 10px 30px;
+    font-size: 18px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+}
+
+.hero-btn:hover {
+    background: #f44336;
+    border: 1px solid #f44336;
+    transition: 0.5s;
+}
+
+/* Glamour Bliss Section */
+.Glamour-bliss {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 50px;
+}
+
+.Glamour-bliss-col {
+    flex-basis: 32%;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Last image in Glamour Bliss section */
+.Glamour-bliss-col img {
+    width: 100%;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Only apply transition to last image */
+.Glamour-bliss-col .layer {
+    background: rgba(226, 0, 0, 0.7);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* On hover, show red overlay for 0.5 sec */
+.Glamour-bliss-col:hover .layer {
+    opacity: 1;
+}
+/* --- Fix for the Makeup Tutorial Boxes --- */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.box {
+    flex-basis: 30%;
+    background: #f8f8f8;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.box:hover {
+    transform: scale(1.05);
+}
+
+/* --- Fix for the Last Image Hover Transition --- */
+.Glamour-bliss img {
+    transition: filter 0.5s ease-in-out;
+}
+
+.Glamour-bliss img:hover {
+    filter: brightness(80%);
+}
+/* --- Center the Heading --- */
+h1, h2 {
+    text-align: center;
+}
+
+/* --- Align All Boxes in One Row --- */
+.row {
+    display: flex;
+    justify-content: center; /* Center the boxes */
+    gap: 20px; /* Space between boxes */
+    flex-wrap: nowrap; /* Prevent wrapping to the next line */
+    overflow-x: auto; /* Enable horizontal scrolling if needed */
+    padding: 20px;
+}
+
+/* --- Box Styling --- */
+.box {
+    flex: 1; /* Make all boxes equal width */
+    max-width: 250px; /* Set a max width for each box */
+    background: #f8f8f8;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 137, 7, 0.526);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* --- Responsive Fix --- */
+@media (max-width: 1200px) {
+    .row {
+        overflow-x: auto; /* Allow scrolling on smaller screens */
+        flex-wrap: nowrap; /* Keep in one row */
+    }
+}
+.cta {
+    margin: 100px auto;
+    width: 80%;
+    background-image: linear-gradient(rgba(76, 69, 61, 0.7), rgba(76, 69, 61, 0.7)), url(7.jpg);
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+    text-align: center;
+    padding: 100px 0;
+}
+
+.cta h1{
+    color: #fff;
+    margin-bottom: 40px;
+    padding: 0;
+}
+@media(max-width: 700px){
+    .cta h1{
+        font-size: 24px;
+    }
+}
+
+.footer{
+    width: 100%;
+    text-align: center;
+    padding: 30px 0;
+}
+.footer h4{
+    margin-bottom: 25px;
+    margin-top: 20px;
+    font-weight: 600;
+}
+.icons .fa{
+    color: #f44336;
+    margin: 0 13px;
+    cursor: pointer;
+    padding: 18px 0;
+}
+.fa-heart-o{
+    color: #8a2018;
+}
+.icons i {
+    color: #3870b4;
+    margin: 0 13px;
+    cursor: pointer;
+    padding: 18px 0;
+    transition: 0.3s; /* Smooth hover effect */
+}
+
+.icons i:hover {
+    color: #3870b4; 
+}
+
+.fa-heart {
+    color: #f44336;
+    .fa-heart-o {  /* Change to correct class */
+        color: #f44336;
+    }
+    
+}
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

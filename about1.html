@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty Deals with Images</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff9fb;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(to right, #ff6b81, #ff8e9e);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            animation: fadeInDown 1s ease;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .deal {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        .deal:nth-child(1) { animation-delay: 0.2s; }
+        .deal:nth-child(2) { animation-delay: 0.4s; }
+        .deal:nth-child(3) { animation-delay: 0.6s; }
+        .deal:nth-child(4) { animation-delay: 0.8s; }
+
+        .deal-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .deal-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .deal-content {
+            flex: 1;
+        }
+        .deal h3 {
+            color: #ff6b81;
+            margin-top: 0;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        .deal:hover h3 {
+            color: #ff4757;
+        }
+        .price {
+            font-weight: bold;
+            color: #ff4757;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        .deal:hover .price {
+            transform: scale(1.05);
+        }
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+        }
+        .btn {
+            display: inline-block;
+            background: #ff6b81;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .btn:hover {
+            background: #ff4757;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 107, 129, 0.4);
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            background-color: #ffebee;
+            color: #666;
+            animation: fadeIn 1s ease 1s forwards;
+            opacity: 0;
+        }
+
+        /* Keyframe animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Pulse animation for special attention */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        .special-deal {
+            animation: pulse 2s infinite;
+            border: 2px solid #ff6b81;
+        }
+
+        @media (max-width: 768px) {
+            .deal {
+                flex-direction: column;
+            }
+            .deal-image {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Beauty Deals</h1>
+        <p>Amazing discounts on premium beauty products</p>
+    </header>
+
+    <div class="container">
+        
+        <div class="deal">
+            <img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                 alt="Skincare Products" class="deal-image">
+            <div class="deal-content">
+                <h3>Complete Skincare Bundle</h3>
+                <p>Includes cleanser, toner, serum, and moisturizer. Perfect for all skin types.</p>
+                <p class="price">₹339.99 <span class="original-price">₹665.00</span></p>
+                <a href="makeup.html" class="btn">View Details</a>
+            </div>
+        </div>
+
+        <div class="deal">
+            <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                 alt="Makeup Brushes" class="deal-image">
+            <div class="deal-content">
+                <h3>Professional Brush Collection</h3>
+                <p>12 vegan makeup brushes with travel case. Soft, synthetic bristles.</p>
+                <p class="price">₹1024.99 <span class="original-price">₹542.99</span></p>
+                <a href="makeup.html" class="btn">View Details</a>
+            </div>
+        </div>
+
+        <div class="deal">
+            <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                 alt="Perfume Bottle" class="deal-image">
+            <div class="deal-content">
+                <h3>Signature Perfume</h3>
+                <p>Elegant floral fragrance with notes of jasmine and vanilla. 100ml bottle.</p>
+                <p class="price">₹759.99 <span class="original-price">₹789.99</span></p>
+                <a href="makeup.html" class="btn">View Details</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2023 Beauty Deals. All rights reserved.</p>
+        <p>Sign up for our newsletter to receive exclusive offers!</p>
+    </footer>
+
+    <script>
+        // Add some interactive animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const deals = document.querySelectorAll('.deal');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, {threshold: 0.1});
+
+            deals.forEach(deal => {
+                observer.observe(deal);
+            });
+
+            // Add click animation to buttons and navigate to makeup.html
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault(); // Prevent default link behavior
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-3px)';
+                        window.location.href = this.getAttribute('href'); // Navigate to makeup.html
+                    }, 200);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

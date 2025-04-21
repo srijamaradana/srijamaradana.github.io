@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Glamour Bliss - Premium Makeup Destination</title>
+    <link rel="stylesheet" href="style4.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="about-hero">
+        <div class="text-box">
+            <h1>Our Beauty Philosophy</h1>
+            <p>At Glamour Bliss, we believe makeup is more than products - it's a form of self-expression, confidence, and artistry.</p>
+        </div>
+    </div>
+
+    <section class="about-content">
+        <div class="about-mission">
+            <h2>Our Story</h2>
+            <p>Founded in 2015, Glamour Bliss began as a small boutique with a big dream: to make luxury beauty accessible to everyone. What started as a single storefront has blossomed into a global beauty destination, serving customers in over 120 countries.</p>
+            
+            </div>
+        </div>
+
+        
+
+        <div class="about-team">
+            <h2>Meet Our Beauty Experts</h2>
+            <p>Our team of professional makeup artists, cosmetic chemists, and beauty enthusiasts work tirelessly to curate the best collection and create educational content to help you look and feel your best.</p>
+            <a href="makeup.html" class="team-btn">Explore Our Tutorials</a>
+        </div>
+    </section>
+
+        
+        
+        
+        
+       
+    </section>
+
+    <script>
+        // Simple animation for stats counting up
+        document.addEventListener("DOMContentLoaded", function() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            
+            statNumbers.forEach(stat => {
+                const target = +stat.innerText.replace('+', '');
+                const increment = target / 50;
+                let current = 0;
+                
+                const updateNumber = () => {
+                    current += increment;
+                    if (current < target) {
+                        stat.innerText = Math.floor(current) + '+';
+                        setTimeout(updateNumber, 25);
+                    } else {
+                        stat.innerText = target + '+';
+                    }
+                };
+                
+                // Trigger when element is in viewport
+                const observer = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting) {
+                        updateNumber();
+                        observer.unobserve(stat.parentElement);
+                    }
+                });
+                
+                observer.observe(stat.parentElement);
+            });
+        });
+    </script>
+</body>
+</html>

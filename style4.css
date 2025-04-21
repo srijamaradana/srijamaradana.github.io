@@ -1,0 +1,238 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background: #fff;
+    color: #333;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    color: #222;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Hero Section */
+.about-hero {
+    min-height: 60vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9');
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+}
+
+.text-box {
+    max-width: 800px;
+}
+
+.text-box h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.text-box p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+/* About Content Sections */
+.about-content {
+    padding: 80px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-mission {
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.about-mission h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    position: relative;
+    display: inline-block;
+}
+
+.about-mission h2::after {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 3px;
+    background: #e8b4b8;
+    bottom: -10px;
+    left: 25%;
+}
+
+.about-mission p {
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    color: #555;
+}
+
+/* Stats Section */
+.mission-stats {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 50px;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 20px;
+    flex: 1;
+    min-width: 200px;
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #e8b4b8;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.stat-label {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+/* Values Section */
+.about-values {
+    margin: 80px 0;
+}
+
+.about-values h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.value-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.value-card:hover {
+    transform: translateY(-10px);
+}
+
+.value-card i {
+    font-size: 2.5rem;
+    color: #e8b4b8;
+    margin-bottom: 20px;
+}
+
+.value-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.value-card p {
+    color: #666;
+}
+
+/* Team Section */
+.about-team {
+    text-align: center;
+    padding: 60px 0;
+    background: #f9f3f3;
+    border-radius: 15px;
+    margin-top: 60px;
+}
+
+.about-team h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.about-team p {
+    max-width: 700px;
+    margin: 0 auto 30px;
+    color: #555;
+}
+
+.team-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: #e8b4b8;
+    color: white;
+    border-radius: 30px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid #e8b4b8;
+}
+
+.team-btn:hover {
+    background: transparent;
+    color: #e8b4b8;
+}
+
+
+
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .text-box h1 {
+        font-size: 2.5rem;
+    }
+    
+    .mission-stats {
+        flex-direction: column;
+    }
+    
+    .stat-item {
+        margin-bottom: 30px;
+    }
+    
+    .about-content {
+        padding: 60px 5%;
+    }
+}
+
+@media (max-width: 480px) {
+    .text-box h1 {
+        font-size: 2rem;
+    }
+    
+    .text-box p {
+        font-size: 1rem;
+    }
+    
+    .about-mission h2, .about-values h2, .about-team h2 {
+        font-size: 2rem;
+    }
+}

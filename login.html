@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Sign In</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 400px;
+            max-width: 100%;
+            padding: 30px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background: #182356;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .toggle-form {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .toggle-form a {
+            color: #182356;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sign Up Form -->
+        <div id="signup-form">
+            <h1>Sign Up</h1>
+            <form id="signUpForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name">
+                    <div class="error" id="name-error">Please enter your name</div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email">
+                    <div class="error" id="email-error">Please enter a valid Gmail address (must end with @gmail.com)</div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password">
+                    <div class="error" id="password-error">Password must be at least 6 characters</div>
+                </div>
+                <button type="submit" id="signup-btn">Sign Up</button>
+            </form>
+            <div class="toggle-form">
+                Already have an account? <a id="show-signin">Sign In</a>
+            </div>
+        </div>
+
+        <!-- Sign In Form (hidden initially) -->
+        <div id="signin-form" class="hidden">
+            <h1>Sign In</h1>
+            <form id="signInForm">
+                <div class="form-group">
+                    <label for="signin-email">Email</label>
+                    <input type="email" id="signin-email">
+                    <div class="error" id="signin-email-error">Please enter a valid Gmail address</div>
+                </div>
+                <div class="form-group">
+                    <label for="signin-password">Password</label>
+                    <input type="password" id="signin-password">
+                    <div class="error" id="signin-password-error">Please enter your password</div>
+                </div>
+                <button type="submit" id="signin-btn">Sign In</button>
+            </form>
+            <div class="toggle-form">
+                Don't have an account? <a id="show-signup">Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle between forms
+        document.getElementById('show-signin').addEventListener('click', function() {
+            document.getElementById('signup-form').classList.add('hidden');
+            document.getElementById('signin-form').classList.remove('hidden');
+        });
+
+        document.getElementById('show-signup').addEventListener('click', function() {
+            document.getElementById('signin-form').classList.add('hidden');
+            document.getElementById('signup-form').classList.remove('hidden');
+        });
+
+        // Track if fields have been interacted with
+        const touchedFields = {
+            name: false,
+            email: false,
+            password: false,
+            signinEmail: false,
+            signinPassword: false
+        };
+
+        // Validation functions
+        function validateName() {
+            const name = document.getElementById('name');
+            const error = document.getElementById('name-error');
+            if (!touchedFields.name) return true;
+            
+            const isValid = name.value.trim() !== '';
+            error.style.display = isValid ? 'none' : 'block';
+            return isValid;
+        }
+
+        function validateEmail() {
+            const email = document.getElementById('email');
+            const error = document.getElementById('email-error');
+            if (!touchedFields.email) return true;
+            
+            const isValid = email.value.endsWith('@gmail.com');
+            error.style.display = isValid ? 'none' : 'block';
+            return isValid;
+        }
+
+        function validatePassword() {
+            const password = document.getElementById('password');
+            const error = document.getElementById('password-error');
+            if (!touchedFields.password) return true;
+            
+            const isValid = password.value.length >= 6;
+            error.style.display = isValid ? 'none' : 'block';
+            return isValid;
+        }
+
+        function validateSigninEmail() {
+            const email = document.getElementById('signin-email');
+            const error = document.getElementById('signin-email-error');
+            if (!touchedFields.signinEmail) return true;
+            
+            const isValid = email.value.endsWith('@gmail.com');
+            error.style.display = isValid ? 'none' : 'block';
+            return isValid;
+        }
+
+        function validateSigninPassword() {
+            const password = document.getElementById('signin-password');
+            const error = document.getElementById('signin-password-error');
+            if (!touchedFields.signinPassword) return true;
+            
+            const isValid = password.value.length > 0;
+            error.style.display = isValid ? 'none' : 'block';
+            return isValid;
+        }
+
+        // Set up event listeners for field interactions
+        document.getElementById('name').addEventListener('blur', function() {
+            touchedFields.name = true;
+            validateName();
+        });
+
+        document.getElementById('email').addEventListener('blur', function() {
+            touchedFields.email = true;
+            validateEmail();
+        });
+
+        document.getElementById('password').addEventListener('blur', function() {
+            touchedFields.password = true;
+            validatePassword();
+        });
+
+        document.getElementById('signin-email').addEventListener('blur', function() {
+            touchedFields.signinEmail = true;
+            validateSigninEmail();
+        });
+
+        document.getElementById('signin-password').addEventListener('blur', function() {
+            touchedFields.signinPassword = true;
+            validateSigninPassword();
+        });
+
+        // Handle sign up
+        document.getElementById('signUpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Mark all fields as touched
+            touchedFields.name = true;
+            touchedFields.email = true;
+            touchedFields.password = true;
+            
+            // Validate all fields
+            const isNameValid = validateName();
+            const isEmailValid = validateEmail();
+            const isPasswordValid = validatePassword();
+            
+            if (isNameValid && isEmailValid && isPasswordValid) {
+                // Store user data
+                const userData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    password: document.getElementById('password').value
+                };
+                localStorage.setItem('userData', JSON.stringify(userData));
+                
+                // Switch to sign in form
+                document.getElementById('signup-form').classList.add('hidden');
+                document.getElementById('signin-form').classList.remove('hidden');
+                
+                // Clear form
+                document.getElementById('signUpForm').reset();
+                
+                // Reset touched state
+                touchedFields.name = false;
+                touchedFields.email = false;
+                touchedFields.password = false;
+            }
+        });
+
+        // Handle sign in
+        document.getElementById('signInForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Mark all fields as touched
+            touchedFields.signinEmail = true;
+            touchedFields.signinPassword = true;
+            
+            // Validate all fields
+            const isEmailValid = validateSigninEmail();
+            const isPasswordValid = validateSigninPassword();
+            
+            if (isEmailValid && isPasswordValid) {
+                // Check credentials
+                const storedData = localStorage.getItem('userData');
+                if (storedData) {
+                    const userData = JSON.parse(storedData);
+                    if (userData.email === document.getElementById('signin-email').value && 
+                        userData.password === document.getElementById('signin-password').value) {
+                        window.location.href = 'index.html';
+                        return;
+                    }
+                }
+                alert('Invalid email or password');
+            }
+        });
+    </script>
+</body>
+</html>

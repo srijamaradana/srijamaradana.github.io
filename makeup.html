@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makeup Beauty</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        body {
+            background-color: #f8f8f8;
+            text-align: center;
+        }
+        header {
+            background: #565b5a;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 10px 0;
+            width: 100%;
+            text-align: center;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+        }
+        nav ul li {
+            margin: 5px 10px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        nav ul li a:hover {
+            color: #ff6b98;
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 1600px;
+            margin: auto;
+            overflow: hidden;
+        }
+        .video-container video {
+            width: 100%;
+            border-radius: 0;
+        }
+        .video-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(35, 31, 31, 0.6);
+            color: #fff;
+            padding: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 5px;
+            width: 90%;
+            text-align: center;
+        }
+        .product-section h2 {
+            margin: 20px 0;
+            font-size: 24px;
+            color: #333;
+        }
+        .highlight {
+            color: #07090a84;
+        }
+        .product-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 0 10px;
+        }
+        .product-card {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: calc(50% - 20px);
+            max-width: 250px;
+            text-align: center;
+            transition: transform 0.3s;
+            margin-bottom: 15px;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+        .product-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background-color: #f5f5f5;
+            padding: 5px;
+        }
+        .price {
+            font-size: 16px;
+            font-weight: bold;
+            color: #27ae60;
+            margin: 8px 0;
+        }
+        .old-price {
+            text-decoration: line-through;
+            color: #888;
+            font-size: 13px;
+            margin-left: 5px;
+        }
+        .add-to-cart-btn {
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color:  #07090a84;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+        }
+        .add-to-cart-btn:hover {
+            background-color: #e0557e;
+        }
+        .cart-icon {
+            position: relative;
+            margin-left: 20px;
+            cursor: pointer;
+        }
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #ff6b98;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 350px;
+            height: 100%;
+            background-color: white;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .cart-sidebar.active {
+            right: 0;
+        }
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .cart-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .cart-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-right: 10px;
+        }
+        .cart-item-details {
+            flex: 1;
+            text-align: left;
+        }
+        .cart-item-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .cart-item-price {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .remove-item {
+            color: #ff6b98;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        .cart-total {
+            font-weight: bold;
+            margin: 20px 0;
+            text-align: right;
+        }
+        .checkout-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #07090a84;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .checkout-btn:hover {
+            background-color: #e0557e;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+        .overlay.active {
+            display: block;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (min-width: 600px) {
+            .logo {
+                font-size: 32px;
+                width: auto;
+                text-align: left;
+                margin-left: 20px;
+            }
+            nav ul {
+                width: auto;
+                justify-content: flex-end;
+            }
+            nav ul li {
+                margin: 0 15px;
+            }
+            nav ul li a {
+                font-size: 16px;
+            }
+            .video-text {
+                font-size: 32px;
+                padding: 15px;
+            }
+            .product-card {
+                width: calc(33.333% - 20px);
+            }
+        }
+
+        @media (min-width: 900px) {
+            header {
+                padding: 30px;
+            }
+            .logo {
+                font-size: 40px;
+            }
+            .video-text {
+                font-size: 45px;
+            }
+            .product-card {
+                width: calc(20% - 20px);
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Makeup Beauty</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="payment.html">Payment</a></li>
+                <li><a href="about1.html">About</a></li>
+                <li class="cart-icon" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="video-container">
+        <div class="video-text">Elevate Your Beauty with High-End Makeup</div>
+        <video autoplay muted loop>
+            <source src="D:\UID CAPSTONE\VIDEOS\video1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <section class="product-section">
+        <h2><span class="highlight">SKIN CARE</span></h2>
+        <div class="product-container">
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/51wHUQhgZWL._AC_UL480_FMwebp_QL65_.jpg">
+                <h3>Gel Cleanser</h3>
+                <p class="price">₹1000.99 <span class="old-price">₹2000.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Gel Cleanser', 1000.99, 'https://m.media-amazon.com/images/I/51wHUQhgZWL._AC_UL480_FMwebp_QL65_.jpg')">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/61ztDuN6w3L._AC_UL480_FMwebp_QL65_.jpg">
+                <h3>Cream Cleanser</h3>
+                <p class="price">₹1555.99 <span class="old-price">₹2000.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Cream Cleanser', 1555.99, 'https://m.media-amazon.com/images/I/61ztDuN6w3L._AC_UL480_FMwebp_QL65_.jpg')">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/51SIwzWTfoL._AC_UL480_FMwebp_QL65_.jpg">
+                <h3>Foam Cleanser</h3>
+                <p class="price">₹615.99 <span class="old-price">₹2000.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Foam Cleanser', 615.99, 'https://m.media-amazon.com/images/I/51SIwzWTfoL._AC_UL480_FMwebp_QL65_.jpg')">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/51jIixo3pgL._AC_UL480_FMwebp_QL65_.jpg">
+                <h3>Hydrating Toner</h3>
+                <p class="price">₹712.99 <span class="old-price">₹1006.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Hydrating Toner', 712.99, 'https://m.media-amazon.com/images/I/51jIixo3pgL._AC_UL480_FMwebp_QL65_.jpg')">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/6117dR-4CCL._AC_UL480_FMwebp_QL65_.jpg">
+                <h3>Vitamin C Serum</h3>
+                <p class="price">₹924.99 <span class="old-price">₹2009.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Vitamin C Serum', 924.99, 'https://m.media-amazon.com/images/I/6117dR-4CCL._AC_UL480_FMwebp_QL65_.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="product-section">
+        <h2><span class="highlight">HAIR CARE</span></h2>
+        <div class="product-container">
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/418EwrvZQLL._AC_UL480_FMwebp_QL65_.jpg">
+                <h3>Conditioners</h3>
+                <p class="price">₹515.99 <span class="old-price">₹1000.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Conditioners', 515.99, 'https://m.media-amazon.com/images/I/418EwrvZQLL._AC_UL480_FMwebp_QL65_.jpg')">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/51Qyi-4ywsL._AC_UL480_FMwebp_QL65_.jpg">
+                <h3>Hair masks</h3>
+                <p class="price">₹1959.99 <span class="old-price">₹2000.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Hair masks', 1959.99, 'https://m.media-amazon.com/images/I/51Qyi-4ywsL._AC_UL480_FMwebp_QL65_.jpg')">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/41dEZn+n+FL._AC_UL480_FMwebp_QL65_.jpg">
+                <h3>Shampoo</h3>
+                <p class="price">₹1522.99 <span class="old-price">₹2000.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Shampoo', 1522.99, 'https://m.media-amazon.com/images/I/41dEZn+n+FL._AC_UL480_FMwebp_QL65_.jpg')">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/51LfZQgYA+L._AC_UL480_FMwebp_QL65_.jpg">
+                <h3>Hair serums</h3>
+                <p class="price">₹1782.99 <span class="old-price">₹1900.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Hair serums', 1782.99, 'https://m.media-amazon.com/images/I/51LfZQgYA+L._AC_UL480_FMwebp_QL65_.jpg')">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/51Rg7uKvmgL._AC_UL480_FMwebp_QL65_.jpg">
+                <h3>Dry Shampoo</h3>
+                <p class="price">₹294.99 <span class="old-price">₹529.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Dry Shampoo', 294.99, 'https://m.media-amazon.com/images/I/51Rg7uKvmgL._AC_UL480_FMwebp_QL65_.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="product-section">
+        <h2><span class="highlight">MAKE UP</span></h2>
+        <div class="product-container">
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/41Qq8Q+ModL._AC_UL480_FMwebp_QL65_.jpg">
+                <h3> Concealer</h3>
+                <p class="price">₹1500.99 <span class="old-price">₹2000.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Concealer', 1500.99, 'https://m.media-amazon.com/images/I/41Qq8Q+ModL._AC_UL480_FMwebp_QL65_.jpg')">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSPNQ_yCPXJtrERRIIsurYCx0yT5qDHvxlW_RNAPNqOcfBy2gfF" alt="Cream Cleanser">
+                <h3>Prime</h3>
+                <p class="price">₹1590.99 <span class="old-price">₹2000.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Prime', 1590.99, 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSPNQ_yCPXJtrERRIIsurYCx0yT5qDHvxlW_RNAPNqOcfBy2gfF')">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRtXknELmf7At5f1AGBot5bsJkOcK-_PMLq9zHWMyIVxZisETBo" alt="Foam Cleanser">
+                <h3>foundation</h3>
+                <p class="price">₹915.99 <span class="old-price">₹1000.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Foundation', 915.99, 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRtXknELmf7At5f1AGBot5bsJkOcK-_PMLq9zHWMyIVxZisETBo')">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/717TH14KIuL._AC_UL480_FMwebp_QL65_.jpg">
+                <h3>Highlighter </h3>
+                <p class="price">₹782.99 <span class="old-price">₹1600.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Highlighter', 782.99, 'https://m.media-amazon.com/images/I/717TH14KIuL._AC_UL480_FMwebp_QL65_.jpg')">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/71nW-ZbQXDL._AC_UL480_FMwebp_QL65_.jpg">
+                <h3>Vitamin C Serum</h3>
+                <p class="price">₹924.99 <span class="old-price">₹1000.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Vitamin C Serum', 924.99, 'https://m.media-amazon.com/images/I/71nW-ZbQXDL._AC_UL480_FMwebp_QL65_.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="product-section">
+        <h2><span class="highlight">BODY WASH</span></h2>
+        <div class="product-container">
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/816nx6GthYL._AC_UL480_FMwebp_QL65_.jpg">
+                <h3> Shower gel</h3>
+                <p class="price">₹915.99 <span class="old-price">₹1000.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Shower gel', 915.99, 'https://m.media-amazon.com/images/I/816nx6GthYL._AC_UL480_FMwebp_QL65_.jpg')">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSE7i3pn472WoGXUVcfF1fnT8XlGthdNwjlSL9bD-KXb1Qu9Vqk" alt="Cream Cleanser">
+                <h3>Nivea Lemon & oil</h3>
+                <p class="price">₹915.99 <span class="old-price">₹2000.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Nivea Lemon & oil', 915.99, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSE7i3pn472WoGXUVcfF1fnT8XlGthdNwjlSL9bD-KXb1Qu9Vqk')">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR05_ZwcqkAupzuqQXRWlcdQvih56yNEFR7UcxtecSufcZboPmv" alt="Foam Cleanser">
+                <h3>Nivea frangipani oil</h3>
+                <p class="price">₹1015.99 <span class="old-price">₹2000.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Nivea frangipani oil', 1015.99, 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR05_ZwcqkAupzuqQXRWlcdQvih56yNEFR7UcxtecSufcZboPmv')">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/618Sb7N3fTL._AC_UL480_FMwebp_QL65_.jpg">
+                <h3>Hydrating Toner</h3>
+                <p class="price">₹912.99 <span class="old-price">₹1600.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Hydrating Toner', 912.99, 'https://m.media-amazon.com/images/I/618Sb7N3fTL._AC_UL480_FMwebp_QL65_.jpg')">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsmo4-JQDq7R-_d_fI6TaOkC8DMdm8KM0OooEfv7_tBwnogVM9" alt="Serum">
+                <h3>Plum bodywash</h3>
+                <p class="price">₹1024.99 <span class="old-price">₹2500.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Plum bodywash', 1024.99, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsmo4-JQDq7R-_d_fI6TaOkC8DMdm8KM0OooEfv7_tBwnogVM9')">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="product-section">
+        <h2><span class="highlight">PERFUMES</span></h2>
+        <div class="product-container">
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/611+OfxzQRL._AC_UL480_FMwebp_QL65_.jpg">
+                <h3>Fogg</h3>
+                <p class="price">₹915.99 <span class="old-price">₹1000.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Fogg', 915.99, 'https://m.media-amazon.com/images/I/611+OfxzQRL._AC_UL480_FMwebp_QL65_.jpg')">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/51SHwOnverL._AC_UL480_FMwebp_QL65_.jpg">
+                <h3>Bella Vita</h3>
+                <p class="price">₹915.99 <span class="old-price">₹1500.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Bella Vita', 915.99, 'https://m.media-amazon.com/images/I/51SHwOnverL._AC_UL480_FMwebp_QL65_.jpg')">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/61EPYE6NW3L._AC_UL480_FMwebp_QL65_.jpg" alt="Foam Cleanser">
+                <h3>Carolina</h3>
+                <p class="price">₹1015.99 <span class="old-price">₹2000.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Carolina', 1015.99, 'https://m.media-amazon.com/images/I/61EPYE6NW3L._AC_UL480_FMwebp_QL65_.jpg')">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/51+Xf9xD2bL._AC_UL480_FMwebp_QL65_.jpg" alt="Toner">
+                <h3>JAGUAR</h3>
+                <p class="price">₹2012.99 <span class="old-price">₹2600.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('JAGUAR', 2012.99, 'https://m.media-amazon.com/images/I/51+Xf9xD2bL._AC_UL480_FMwebp_QL65_.jpg')">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/61rRQ659EeL._AC_UL480_FMwebp_QL65_.jpg" alt="Serum">
+                <h3>Gucci</h3>
+                <p class="price">₹424.99 <span class="old-price">₹1000.99</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Gucci', 424.99, 'https://m.media-amazon.com/images/I/61rRQ659EeL._AC_UL480_FMwebp_QL65_.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="overlay" id="overlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-cart" onclick="toggleCart()">&times;</button>
+        </div>
+        <div id="cartItems"></div>
+        <div class="cart-total">Total: ₹<span id="cartTotal">0.00</span></div>
+        <button class="checkout-btn" onclick="checkout()">Checkout</button>
+    </div>
+
+    <script>
+        let cart = [];
+        
+        // Load cart from localStorage if available
+        if (localStorage.getItem('cart')) {
+            cart = JSON.parse(localStorage.getItem('cart'));
+            updateCartCount();
+        }
+        
+        function addToCart(name, price, image) {
+            // Check if item already exists in cart
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    image: image,
+                    quantity: 1
+                });
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            updateCartCount();
+            updateCartItems();
+            
+            // Show a quick notification
+            alert(`${name} added to cart!`);
+        }
+        
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            updateCartItems();
+        }
+        
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            document.querySelector('.cart-count').textContent = count;
+        }
+        
+        function updateCartItems() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const cartTotalElement = document.getElementById('cartTotal');
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p>Your cart is empty</p>';
+                cartTotalElement.textContent = '0.00';
+                return;
+            }
+            
+            let itemsHTML = '';
+            let total = 0;
+            
+            cart.forEach((item, index) => {
+                itemsHTML += `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="cart-item-details">
+                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-price">₹${item.price.toFixed(2)} x ${item.quantity}</div>
+                            <button class="remove-item" onclick="removeFromCart(${index})">Remove</button>
+                        </div>
+                    </div>
+                `;
+                total += item.price * item.quantity;
+            });
+            
+            cartItemsContainer.innerHTML = itemsHTML;
+            cartTotalElement.textContent = total.toFixed(2);
+        }
+        
+        function toggleCart() {
+            const cartSidebar = document.getElementById('cartSidebar');
+            const overlay = document.getElementById('overlay');
+            
+            cartSidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            
+            if (cartSidebar.classList.contains('active')) {
+                updateCartItems();
+            }
+        }
+        
+        function checkout() {
+            // Save cart to localStorage before redirecting
+            localStorage.setItem('cart', JSON.stringify(cart));
+            window.location.href = 'payment.html';
+        }
+        
+        // Close cart when clicking on overlay
+        document.getElementById('overlay').addEventListener('click', toggleCart);
+    </script>
+</body>
+</html>
